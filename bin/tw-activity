@@ -1,0 +1,201 @@
+#! /usr/bin/env node
+// @ts-check
+/* eslint-disable no-console */
+
+const yargs = require("yargs")
+const nconf = require("nconf")
+
+const {
+  createWebhook,
+  deleteWebhook,
+  getWebhooks,
+  addSubscriptions,
+  deleteSubscriptions,
+  getSubscriptions,
+  triggerWebhookCRC
+} = require("../dist/api")
+
+const {
+  deleteWebhookMessage,
+  addSubscriptionsMessage,
+  deleteSubscriptionsMessage,
+  getSubscriptionsMessage,
+  triggerWebhookCRCMessage
+} = require("../dist/message")
+
+// --- begin utils ---
+
+/// compose(f1, f2)(initial) = f1(f2(initial))
+const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)))
+
+const assignURLArg = builder => builder.positional("url", { description: "a webhook URL", type: "string" })
+const assignIdArg = builder => builder.positional("id", { description: "a webhook ID", type: "string" })
+const setFailExitCode = () => process.exitCode = 1
+
+const getOAuth = file => {
+
+  nconf.file({ file }).env()
+
+  const oauth = {
+    consumer_key: nconf.get("TWITTER_CONSUMER_KEY"),
+    consumer_secret: nconf.get("TWITTER_CONSUMER_SECRET"),
+    token: nconf.get("TWITTER_ACCESS_TOKEN"),
+    token_secret: nconf.get("TWITTER_ACCESS_TOKEN_SECRET")
+  }
+  return oauth
+}
+
+const printVerbose = response => {
+
+  if (response.request && response.request.toJSON) {
+    /** @type {string} */
+    const log = JSON.stringify(response.request.toJSON(), null, 2).split("\n")
+      .map(line => {
+        return `> ${line}`
+      }).join("\n")
+    console.error(log)
+  }
+
+  if (response.toJSON) {
+    const resp = response.toJSON()
+    if (resp.request) {
+      delete resp.request
+    }
+    /** @type {string} */
+    const log = JSON.stringify(resp, null, 2).split("\n")
+      .map(line => {
+        return `< ${line}`
+      }).join("\n")
+    console.error(log)
+  }
+}
+
+const printSuccess = verbose => {
+
+  return response => {
+    verbose === true && printVerbose(response)
+    /** @type {string} */
+    const body = response.body || ""
+    if (body.length > 0) {
+      console.log(body)
+    }
+    return response
+  }
+}
+
+const printError = verbose => {
+  return error => {
+    verbose === true && error.response && printVerbose(error.response)
+    console.error(error.response.body)
+  }
+}
+
+// --- end utils ---
+
+yargs.strict()
+yargs.detectLocale(false)
+yargs.command(["--help", "-h", "help"], "Show help").help()
+yargs.option("config", { description: "Twitter config file", default: "./config.json" })
+yargs.option("verbose", { description: "Be verbose", default: false, type: "boolean"})
+
+yargs.command("create-wh <url>", "Create webhook config", builder => {
+  return assignURLArg(builder)
+}, args => {
+
+  const oauth = getOAuth(args.config)
+  const url = args.url
+
+  createWebhook(url, oauth, true)
+    .then(printSuccess(args.verbose))
+    .catch(compose(setFailExitCode, printError(args.verbose)))
+})
+
+yargs.command("delete-wh <id>", "Delete webhook config", builder => {
+  return assignIdArg(builder)
+}, args => {
+
+  const oauth = getOAuth(args.config)
+
+  /** @type {string} */
+  let configId
+  console.log("Checking the webhook config...")
+  getWebhooks(oauth, true)
+    .then(resp0 => {
+      const configs = JSON.parse(resp0.body)
+      if (configs && configs.length > 0) {
+        configId = configs[0].id
+        console.log("Webhook config is exists.", JSON.stringify(configs[0]))
+        return deleteSubscriptions(configId, oauth)
+      } else {
+        return Promise.reject(new Error("App does not have a webhook config."))
+      }
+    })
+    .then(resp1 => {
+      const msg = deleteSubscriptionsMessage(resp1.statusCode)
+      if (msg) {
+        console.log(msg)
+      }
+      return deleteWebhook(configId, oauth)
+    })
+    .then(compose(console.log, deleteWebhookMessage, r => r.statusCode, printSuccess(args.verbose)))
+    .catch(compose(setFailExitCode, printError(args.verbose)))
+})
+
+yargs.command("get-wh", "Get webhook config", builder => {
+  return builder
+}, args => {
+
+  const oauth = getOAuth(args.config)
+
+  getWebhooks(oauth, true)
+    .then(printSuccess(args.verbose))
+    .catch(compose(setFailExitCode, printError(args.verbose)))
+})
+
+yargs.command("add-sub <id>", "Add subscription", builder => {
+  return assignIdArg(builder)
+}, args => {
+
+  const oauth = getOAuth(args.config)
+
+  addSubscriptions(args.id, oauth)
+    .then(compose(console.log, addSubscriptionsMessage, r => r.statusCode, printSuccess(args.verbose)))
+    .catch(compose(setFailExitCode, printError(args.verbose)))
+})
+
+yargs.command("delete-sub <id>", "Delete subscription", builder => {
+  return assignIdArg(builder)
+}, args => {
+
+  const oauth = getOAuth(args.config)
+
+  deleteSubscriptions(args.id, oauth)
+    .then(compose(console.log, deleteSubscriptionsMessage, r => r.statusCode, printSuccess(args.verbose)))
+    .catch(compose(setFailExitCode, printError(args.verbose)))
+})
+
+yargs.command("get-sub <id>", "Get subscriptions", builder => {
+  return assignIdArg(builder)
+}, args => {
+
+  const oauth = getOAuth(args.config)
+
+  getSubscriptions(args.id, oauth)
+    .then(compose(console.log, getSubscriptionsMessage, r => r.statusCode, printSuccess(args.verbose)))
+    .catch(compose(setFailExitCode, printError(args.verbose)))
+})
+
+yargs.command("trigger <id>", "Tritter CRC request", builder => {
+  return assignIdArg(builder)
+}, args => {
+
+  const oauth = getOAuth(args.config)
+
+  triggerWebhookCRC(args.id, oauth)
+    .then(compose(console.log, triggerWebhookCRCMessage, r => r.statusCode, printSuccess(args.verbose)))
+    .catch(compose(setFailExitCode, printError(args.verbose)))
+})
+
+if (yargs.argv._.length === 0) {
+  yargs.showHelp()
+}

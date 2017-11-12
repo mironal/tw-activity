@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`API sheme 1`] = `
+Object {
+  "api": Object {
+    "addSubscriptions": [Function],
+    "createWebhook": [Function],
+    "deleteSubscriptions": [Function],
+    "deleteWebhook": [Function],
+    "getSubscriptions": [Function],
+    "getWebhooks": [Function],
+    "triggerWebhookCRC": [Function],
+  },
+  "default": Object {
+    "addSubscriptions": [Function],
+    "createWebhook": [Function],
+    "deleteSubscriptions": [Function],
+    "deleteWebhook": [Function],
+    "getSubscriptions": [Function],
+    "getWebhooks": [Function],
+    "triggerWebhookCRC": [Function],
+  },
+  "message": Object {
+    "addSubscriptionsMessage": [Function],
+    "createWebhookMessage": [Function],
+    "deleteSubscriptionsMessage": [Function],
+    "deleteWebhookMessage": [Function],
+    "getSubscriptionsMessage": [Function],
+    "getWebhooksMessage": [Function],
+    "triggerWebhookCRCMessage": [Function],
+  },
+}
+`;

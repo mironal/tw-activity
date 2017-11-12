@@ -1,0 +1,6 @@
+.vscode
+src/
+docs/
+config.json
+tslint.json
+tsconfig.json

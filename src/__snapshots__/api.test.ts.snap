@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`API scheme 1`] = `
+Object {
+  "addSubscriptions": [Function],
+  "createWebhook": [Function],
+  "deleteSubscriptions": [Function],
+  "deleteWebhook": [Function],
+  "getSubscriptions": [Function],
+  "getWebhooks": [Function],
+  "triggerWebhookCRC": [Function],
+}
+`;
