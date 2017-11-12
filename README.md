@@ -5,6 +5,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/mironal/tw-activity.svg)](https://greenkeeper.io/)
 
+[![codecov](https://codecov.io/gh/mironal/tw-activity/branch/master/graph/badge.svg)](https://codecov.io/gh/mironal/tw-activity)
 
 A library for the Twitter Account Activity API. https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
 
