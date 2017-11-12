@@ -1,6 +1,10 @@
 # tw-activity
 
+
 [![Build Status](https://travis-ci.org/mironal/tw-activity.svg)](https://travis-ci.org/mironal/tw-activity)
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/mironal/tw-activity.svg)](https://greenkeeper.io/)
+
 
 A library for the Twitter Account Activity API. https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
 
