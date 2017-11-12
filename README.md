@@ -1,11 +1,9 @@
 # tw-activity
 
 
-[![Build Status](https://travis-ci.org/mironal/tw-activity.svg)](https://travis-ci.org/mironal/tw-activity)
+[![NPM](https://nodei.co/npm/tw-activity.png)](https://nodei.co/npm/tw-activity/)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/mironal/tw-activity.svg)](https://greenkeeper.io/)
-
-[![codecov](https://codecov.io/gh/mironal/tw-activity/branch/master/graph/badge.svg)](https://codecov.io/gh/mironal/tw-activity)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/mironal/tw-activity/blob/master/LICENSE) [![Build Status](https://travis-ci.org/mironal/tw-activity.svg)](https://travis-ci.org/mironal/tw-activity) [![Greenkeeper badge](https://badges.greenkeeper.io/mironal/tw-activity.svg)](https://greenkeeper.io/) [![codecov](https://codecov.io/gh/mironal/tw-activity/branch/master/graph/badge.svg)](https://codecov.io/gh/mironal/tw-activity)
 
 A library for the Twitter Account Activity API. https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
 
