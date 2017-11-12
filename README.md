@@ -1,5 +1,7 @@
 # tw-activity
 
+[![Build Status](https://travis-ci.org/mironal/tw-activity.svg)](https://travis-ci.org/mironal/tw-activity)
+
 A library for the Twitter Account Activity API. https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
 
 ## How to use
