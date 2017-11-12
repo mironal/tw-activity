@@ -9,7 +9,7 @@
         "build": "tsc",
         "lint": "npm run lint:ts && npm run lint:js",
         "lint:ts": "tslint --project tslint.json",
-        "lint:js": "eslint ./bin/tw-webhook",
+        "lint:js": "eslint ./bin/tw-activity",
         "test": "jest",
         "doc": "typedoc --mode file --readme none --target ES5 --disableOutputCheck --exclude '**/*.test.ts' --out ./docs ./src",
         "prepublish": "npm run build"

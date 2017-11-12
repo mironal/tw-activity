@@ -71,6 +71,6 @@ dist/
 *.log
 *.tgz
 
-# tw-webhook
+# tw-activity
 .vscode
 config.json
