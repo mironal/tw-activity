@@ -1,6 +1,5 @@
-import * as request from "request";
-import { OptionsWithUrl, RequestResponse } from "request";
-import { isError } from "util";
+import { OptionsWithUrl } from "request";
+import { promiseRequest, PromiseResponse } from "./preqeust";
 
 export interface OAuth {
     consumer_key: string;
@@ -11,7 +10,6 @@ export interface OAuth {
 
 export type WebhookURL = string;
 export type WebhookID = string;
-export type PromiseResponse = Promise<RequestResponse>;
 
 const URL = "https://api.twitter.com/1.1/account_activity/webhooks";
 
@@ -19,31 +17,6 @@ function withDefaultOption(opt: OptionsWithUrl): OptionsWithUrl {
     return {
         ...opt,
     };
-}
-
-function isErrorStatus(statusCode?: number) {
-    return statusCode && 400 <= statusCode && statusCode < 600;
-}
-
-function promiseRequest(options: OptionsWithUrl, rejectOnErrorStatus: boolean): PromiseResponse {
-
-    return new Promise((resolve, reject) => {
-        request(options, (error: Error, response: RequestResponse, body: any) => {
-            if (error) {
-                reject(error);
-                return;
-            }
-
-            if (rejectOnErrorStatus && isErrorStatus(response.statusCode)) {
-
-                const statusError: any = new Error(`StatusCodeError: ${response.statusCode} - ${response.statusMessage}`);
-                statusError.response = response;
-                reject(statusError);
-            } else {
-                resolve(response);
-            }
-        });
-    });
 }
 
 /**
