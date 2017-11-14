@@ -44,6 +44,19 @@ createWebhook(url, oauth)
   .catch(error => console.error(error))
 ```
 
+#### Reject on error status code
+
+You can use `rejectOnErrorStatus` to catch errors when you
+receive the error status code (4xx or 5xx).
+
+Default is false.
+
+```js
+createWebhook(url, oauth, true) // <- if got status code 4xx or 5xx.
+  .then(resp => console.log(resp.body))
+  .catch(error => console.error(error)) // <- you will catch the error.
+```
+
 ## API document
 
 [API document is here](https://mironal.github.io/tw-activity/)
