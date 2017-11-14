@@ -40,7 +40,7 @@ const oauth = {
 }
 
 createWebhook(url, oauth)
-  .then(resp => console.log(resp))
+  .then(resp => console.log(resp.body)) // may got `"[]"`
   .catch(error => console.error(error))
 ```
 
