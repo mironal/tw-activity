@@ -11,6 +11,9 @@ Object {
     "getWebhooks": [Function],
     "triggerWebhookCRC": [Function],
   },
+  "crc": Object {
+    "default": [Function],
+  },
   "default": Object {
     "addSubscriptions": [Function],
     "createWebhook": [Function],

@@ -18,7 +18,6 @@ npm install -g tw-activity
 tw-activity --help
 ```
 
-
 ### Use in your code
 
 ```
@@ -35,7 +34,7 @@ const {
 
 const url = "https://your.domain/webhook"
 
-const oauth = { 
+const oauth = {
     // your consumer key...
 }
 
@@ -56,6 +55,32 @@ createWebhook(url, oauth, true) // <- if got status code 4xx or 5xx.
   .then(resp => console.log(resp.body))
   .catch(error => console.error(error)) // <- you will catch the error.
 ```
+
+For more example. you can see the `/bin/tw-activity`
+
+### Use in your server side code
+
+You can also generate response of your Webhook server.
+
+```js
+const { responseToken } = require("tw-activity").crc
+
+ function serverWebhookGetEndpoint(request, response) {
+   const { crc_token } = request.query;
+   if (crc_token) {
+     const response_token = responseToken(crc_token, "your consumer secret")
+     response.status(200).send({
+       response_token
+    });
+  } else {
+    console.error("crc_token missing from request.");
+    response.sendStatus(400);
+  }
+}
+```
+
+[More detail](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/securing-webhooks)
+
 
 ## API document
 
