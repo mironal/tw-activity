@@ -11,7 +11,7 @@
         "lint:ts": "tslint --project tslint.json",
         "lint:js": "eslint ./bin/tw-activity",
         "test": "jest",
-        "doc": "typedoc --mode file --readme none --target ES5 --disableOutputCheck --exclude '**/*.test.ts' --out ./docs ./src",
+        "doc": "typedoc --theme minimal --mode modules --readme none --target ES5 --disableOutputCheck --exclude '**/*.test.ts' --excludePrivate --out ./docs ./src",
         "prepublish": "npm run build"
     },
     "keywords": [
