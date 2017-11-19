@@ -12,9 +12,7 @@ import { createHmac } from "crypto";
  *   const { crc_token } = request.query;
  *   if (crc_token) {
  *     const response_token = responseToken(crc_token, "your consumer secret")
- *     response.status(200).send({
- *       response_token
- *    });
+ *     response.status(200).send(response_token);
  *  } else {
  *    console.error("crc_token missing from request.");
  *    response.sendStatus(400);

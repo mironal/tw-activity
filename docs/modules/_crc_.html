@@ -941,7 +941,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/mironal/tw-activity/blob/3df07c9/src/crc.ts#L27">crc.ts:27</a></li>
+								<li>Defined in <a href="https://github.com/mironal/tw-activity/blob/7c38ad3/src/crc.ts#L25">crc.ts:25</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -956,9 +956,7 @@ img { max-width: 100%; }
   <span class="hljs-keyword">const</span> { crc_token } = request.query;
   <span class="hljs-keyword">if</span> (crc_token) {
     <span class="hljs-keyword">const</span> response_token = responseToken(crc_token, <span class="hljs-string">"your consumer secret"</span>)
-    response.status(<span class="hljs-number">200</span>).send({
-      response_token
-   });
+    response.status(<span class="hljs-number">200</span>).send(response_token);
  } <span class="hljs-keyword">else</span> {
    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"crc_token missing from request."</span>);
    response.sendStatus(<span class="hljs-number">400</span>);
