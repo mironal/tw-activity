@@ -123,3 +123,10 @@ Pass the twitter config json file.
     "TWITTER_ACCESS_TOKEN_SECRET": ""
 }
 ```
+## Example webhook endpoint
+
+You can make the webhook endpoint easily using firebase functions.
+
+Please check the following project.
+
+https://github.com/mironal/firebase-tw-webhook
