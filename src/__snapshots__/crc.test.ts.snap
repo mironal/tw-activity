@@ -3,5 +3,6 @@
 exports[`API scheme 1`] = `
 Object {
   "default": [Function],
+  "responseToken": [Function],
 }
 `;

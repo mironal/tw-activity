@@ -24,9 +24,11 @@ import { createHmac } from "crypto";
  * @param crcToken - crc token
  * @param consumerSecret - consumer key secret.
  */
-export default function responseToken(crcToken: string, consumerSecret: string) {
+export function responseToken(crcToken: string, consumerSecret: string) {
     const hmac = createHmac("sha256", consumerSecret).update(crcToken).digest("base64");
     return {
         response_token: `sha256=${hmac}`,
     };
 }
+
+export default responseToken;
