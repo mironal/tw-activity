@@ -1,6 +1,6 @@
 {
     "name": "tw-activity",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "A library for the Twitter Account Activity API. https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
