@@ -32,7 +32,7 @@
         "url": "https://github.com/mironal/tw-activity/issues"
     },
     "dependencies": {
-        "@types/request": "2.0.8",
+        "@types/request": "2.0.9",
         "nconf": "0.9.1",
         "request": "2.83.0",
         "yargs": "10.0.3"
