@@ -33,7 +33,7 @@
     },
     "dependencies": {
         "@types/request": "2.0.9",
-        "nconf": "0.9.1",
+        "nconf": "0.10.0",
         "request": "2.83.0",
         "yargs": "10.0.3"
     },
