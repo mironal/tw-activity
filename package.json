@@ -35,7 +35,7 @@
         "@types/request": "2.0.12",
         "nconf": "0.10.0",
         "request": "2.83.0",
-        "yargs": "10.1.1"
+        "yargs": "11.0.0"
     },
     "devDependencies": {
         "@types/jest": "22.0.1",
