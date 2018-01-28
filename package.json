@@ -32,18 +32,18 @@
         "url": "https://github.com/mironal/tw-activity/issues"
     },
     "dependencies": {
-        "@types/request": "2.0.12",
+        "@types/request": "2.0.13",
         "nconf": "0.10.0",
         "request": "2.83.0",
-        "yargs": "10.1.1"
+        "yargs": "11.0.0"
     },
     "devDependencies": {
-        "@types/jest": "22.0.1",
+        "@types/jest": "22.1.0",
         "@types/nock": "9.1.2",
         "babel-jest": "22.1.0",
         "babel-preset-es2015": "6.24.1",
         "codecov": "^3.0.0",
-        "eslint": "4.15.0",
+        "eslint": "4.16.0",
         "jest": "22.1.4",
         "nock": "9.1.6",
         "nyc": "^11.4.1",
